@@ -1,0 +1,14 @@
+#VS code
+.vscode/
+./*.git
+
+#Python
+__pychache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+venv/
+text
+*/__pychache__
+**/main.py
