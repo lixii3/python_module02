@@ -1,5 +1,3 @@
-
-
 class Plant():
     def __init__(self, name: str, height: int, days: int, watering_need: int):
         self.name = name
