@@ -34,11 +34,14 @@ def test_plant_checks() -> None:
     test_trycatch("michele", -1, 11)
     print("\nTesting bad sunlight hours...")
     test_trycatch("michele", 5, 18)
+    print("\nAll error raising tests completed!")
 
 
-# def main():
-#     test_plant_checks()
+'''
+def main():
+    test_plant_checks()
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
+'''

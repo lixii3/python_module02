@@ -1,4 +1,4 @@
-def garden_operations(op_type: str, data=0) -> None:
+def garden_operations(op_type: str) -> None:
     if op_type == "value":
         try:
             int("abc")
@@ -7,28 +7,24 @@ def garden_operations(op_type: str, data=0) -> None:
 
     if op_type == "zero":
         try:
-            42 / data
+            42 / 0
         except ZeroDivisionError:
             raise ZeroDivisionError("Caught ZeroDivisionError:"
                                     " division by zero")
 
     elif op_type == "file":
         try:
-            open("missing_file.txt")
+            open("missing.txt")
         except FileNotFoundError:
             raise FileNotFoundError("Caught FileNotFoundError: "
-                                    "No such file 'missing_file.txt'")
+                                    "No such file 'missing.txt'")
 
     elif op_type == "key":
-        sunflower: any
         try:
             inventory = {"roses": 5, "tulips": 10}
-            sunflower = inventory["sunflower"]
+            inventory["sunflower"]
         except KeyError:
             raise KeyError("Caught KeyError: 'missing_plant'")
-        finally:
-            sunflower = 0
-            data = sunflower
 
     elif op_type == "all":
         try:
@@ -51,7 +47,7 @@ def garden_operations(op_type: str, data=0) -> None:
 
 def test_error_types():
     print("=== Garden Error Types Demo ===")
-    print("Testing ValueError...")
+    print("\nTesting ValueError...")
     try:
         garden_operations("value")
     except ValueError as e:
@@ -79,9 +75,11 @@ def test_error_types():
     print("\nAll error types tested successfully!")
 
 
-# def main():
-#     test_error_types()
+'''
+def main():
+    test_error_types()
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
+'''

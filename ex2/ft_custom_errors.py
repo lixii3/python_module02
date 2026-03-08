@@ -1,10 +1,26 @@
+class GardenError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+
+
+class PlantError(GardenError):
+    def __init__(self, message: str):
+        self.message = message
+        super().__init__(message)
+
+
+class WaterError(GardenError):
+    def __init__(self, message: str):
+        self.message = message
+        super().__init__(message)
+
+
 class Plant():
-    def __init__(self, name: str, height: int, days: int, watering_need: int):
+    def __init__(self, name: str, height: int, days: int):
         self.name = name
         self.height = height
         self.days = days
-        self.hydration = 20
-        self.watering_need = watering_need if watering_need <= 20 else 20
+        self.water_level = 1
 
     def grow(self) -> None:
         self.height += 1
@@ -13,90 +29,79 @@ class Plant():
         self.days += 1
         if self.days % 2 == 1:
             self.grow()
-        self.hydration -= 2
+        self.water_level -= 2
 
     def hydrate(self) -> None:
-        self.hydration += 1
-        if self.hydration > 20 or self.hydration <= 0:
-            raise PlantError(self)
+        self.water_level += 1
+
+    def check_status(self) -> None:
+        if self.water_level > 20 or self.water_level < 0 or self.days > 50:
+            raise PlantError(f"The {self.name} plant is wilting!")
 
 
 class Garden():
     def __init__(self, owner: str) -> None:
         self.owner = owner
-        self.plants: dict[str, Plant] = {}
-        self.water_tank = 20
+        self.plants: list[Plant] = []
+        self.water_tank = 1
 
     def add_plant(self, plant: Plant) -> None:
-        self.plants.setdefault(plant.name, plant)
+        self.plants.append(plant)
 
     def fill_tank(self) -> None:
-        self.water_tank = 20
+        self.water_tank = 10
 
     def water(self, plant: Plant) -> None:
-        if self.water_tank <= 0:
-            raise WaterError()
-        if plant.watering_need > self.water_tank:
-            raise WaterError()
+        try:
+            self.check_water_tank()
+        except WaterError as e:
+            raise e
         plant.hydrate()
-        self.water_tank -= plant.watering_need
+        self.water_tank -= 1
 
     def water_garden(self) -> None:
-        for plant in self.plants.values():
+        for plant in self.plants:
             self.water(plant)
 
-
-class GardenError(Exception):
-    def __init__(self, message):
-        super().__init__(message)
-
-
-class PlantError(GardenError):
-    def __init__(self, plant: Plant):
-        super().__init__(f"Caught a garden error: The {plant.name} plant "
-                         "is wilthing")
-        self.faulty_plant = plant
-
-
-class WaterError(GardenError):
-    def __init__(self):
-        super().__init__("Caught a garden error: "
-                         "Not enough water in the tank!")
+    def check_water_tank(self) -> None:
+        if self.water_tank <= 0:
+            raise WaterError("Not enough water in tank")
 
 
 def main():
     garden: Garden = Garden("Paolo Ruffini")
-    gabriele = Plant("Gabriele", 69, 96, 10)
-    garden.add_plant(Plant("Hosa Meravijosah", 69, 96, 11))
-    garden.add_plant(Plant("piedini", 1, 2, 3))
+    gabriele = Plant("Gabriele", 12, 36)
+    garden.add_plant(Plant("Hosa Meravijosah", 69, 49))
+    garden.add_plant(Plant("piedini", 1, 2))
     garden.add_plant(gabriele)
 
     print("=== Custom Garden Errors Demo ===")
     print("\nTesting PlantError...")
+
     try:
-        gabriele.hydrate()
+        gabriele.water_level = 21
+        gabriele.check_status()
     except PlantError as e:
-        print(e)
+        print(f"Caught PlantError: {e}")
 
     print("\nTesting WaterError...")
-    for i in range(10):
-        for plant in garden.plants.values():
-            plant.age()
+
     try:
         garden.water_garden()
-    except (WaterError, PlantError) as e:
-        print(e)
+    except GardenError as e:
+        print(f"Caught WaterError: {e}")
 
     print("\nTesting catching all garden errors...")
-    for i in range(20):
-        try:
-            gabriele.hydrate()
-        except PlantError as e:
-            print(e)
+
+    try:
+        gabriele.check_status()
+    except GardenError as e:
+        print(f"Caught a garden error: {e}")
+
     try:
         garden.water_garden()
-    except (WaterError, PlantError) as e:
-        print(e)
+    except GardenError as e:
+        print(f"Caught a garden error: {e}")
     print("\nAll custom error types work correctly!")
 
 

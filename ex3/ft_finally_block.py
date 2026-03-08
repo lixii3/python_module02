@@ -35,10 +35,7 @@ def test_watering_system() -> None:
         Plant("patata", 1, 1)}
     bad_list: list[Plant] = {
         Plant("PaoloRuffini", 5, 1),
-        Plant(None, 3, 9),
-        Plant("patata", 1, 1)}
-
-    print("=== Garden Watering System ===")
+        Plant(None, 3, 9)}
 
     def ft_test(plant_list: list[Plant]) -> None:
         try:
@@ -48,14 +45,19 @@ def test_watering_system() -> None:
         finally:
             print("Closing watering system (cleanup)")
 
+    print("=== Garden Watering System ===")
     print("\nTesting normal watering...")
     ft_test(good_list)
     print("\nTesting with error...")
     ft_test(bad_list)
-
-# def main():
-#     test_watering_system()
+    print("\nCleanup always happens, even with errors!")
 
 
-# if __name__ == "__main__":
-#     main()
+'''
+def main():
+    test_watering_system()
+
+
+if __name__ == "__main__":
+    main()
+'''
