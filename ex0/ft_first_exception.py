@@ -13,36 +13,20 @@ def check_temperature(temp: str) -> int:
 
 def test_temperature_input():
     print("=== Garden Temperature Checker ===")
-    print("\nTesting temperature: 25")
-    try:
-        check_temperature("25")
-        print("Temperature 25°C is perfect for plants!")
-    except ValueError as e:
-        print(e)
-    print("\nTesting temperature: abc")
-    try:
-        check_temperature("abc")
-    except ValueError as e:
-        print(e)
-    print("\nTesting temperature: 100")
-    try:
-        check_temperature("100")
-    except ValueError as e:
-        print(e)
-    print("\nTesting temperature: -50")
-    try:
-        check_temperature("-50")
-    except ValueError as e:
-        print(e)
+    for i in range(4):
+        x = input("\nTesting temperature: ")
+        try:
+            check_temperature(x)
+            print(f"Temperature {x}°C is perfect for plants!")
+        except ValueError as e:
+            print(e)
 
     print("\nAll tests completed - program didn't crash!")
 
 
-'''
 def main():
     test_temperature_input()
 
 
 if __name__ == "__main__":
     main()
-'''

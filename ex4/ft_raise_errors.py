@@ -37,11 +37,9 @@ def test_plant_checks() -> None:
     print("\nAll error raising tests completed!")
 
 
-'''
 def main():
     test_plant_checks()
 
 
 if __name__ == "__main__":
     main()
-'''

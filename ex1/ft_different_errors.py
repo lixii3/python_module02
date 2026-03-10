@@ -75,11 +75,9 @@ def test_error_types():
     print("\nAll error types tested successfully!")
 
 
-'''
-def main():
-    test_error_types()
+# def main():
+#     test_error_types()
 
 
-if __name__ == "__main__":
-    main()
-'''
+# if __name__ == "__main__":
+#     main()
