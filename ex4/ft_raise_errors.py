@@ -37,7 +37,7 @@ def test_plant_checks() -> None:
     print("\nAll error raising tests completed!")
 
 
-def main():
+def main() -> None:
     test_plant_checks()
 
 

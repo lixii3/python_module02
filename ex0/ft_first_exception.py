@@ -11,7 +11,7 @@ def check_temperature(temp: str) -> int:
     return temper
 
 
-def test_temperature_input():
+def test_temperature_input() -> None:
     print("=== Garden Temperature Checker ===")
     for i in range(4):
         x = input("\nTesting temperature: ")
@@ -24,7 +24,7 @@ def test_temperature_input():
     print("\nAll tests completed - program didn't crash!")
 
 
-def main():
+def main() -> None:
     test_temperature_input()
 
 

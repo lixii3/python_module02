@@ -1,5 +1,5 @@
 class Plant():
-    def __init__(self, name: str, height: int, days: int):
+    def __init__(self, name: str, height: int, days: int) -> None:
         self.name = name
         self.height = height
         self.days = days
@@ -51,7 +51,7 @@ def test_watering_system() -> None:
     print("\nCleanup always happens, even with errors!")
 
 
-def main():
+def main() -> None:
     test_watering_system()
 
 

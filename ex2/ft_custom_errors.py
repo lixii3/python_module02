@@ -68,7 +68,7 @@ class Garden():
             raise WaterError("Not enough water in tank")
 
 
-def main():
+def main() -> None:
     garden: Garden = Garden("Paolo Ruffini")
     gabriele = Plant("Gabriele", 12, 36)
     garden.add_plant(Plant("Hosa Meravijosah", 69, 49))
